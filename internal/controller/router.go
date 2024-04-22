@@ -12,6 +12,5 @@ import (
 
 func Setup(app pkg.Application, router *gin.Engine) {
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	router.Static("/images", "./images")
 
 }

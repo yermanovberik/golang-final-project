@@ -10,3 +10,4 @@ postgres:
   username: "inf_368"
   password: "aY0Rw1znBNkrRwkUm9MX4ceoCn55azml"
   database: "university_management_system"
+port: 8082

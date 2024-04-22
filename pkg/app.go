@@ -6,19 +6,17 @@ import (
 
 type Application struct {
 	Pql   *pgxpool.Pool
+	Env *Env
 }
 
 func App() (Application, error) {
 	app := &Application{}
-	conn, err := NewPgxConn()
+	app.Env = NewEnv()
+	conn, err := NewPgxConn(app.Env)
 	if err != nil {
 		return Application{}, err
 	}
 	app.Pql = conn
 
 	return *app, nil
-}
-
-func (app *Application) CloseDBConnection() {
-	app.CloseDBConnection()
 }

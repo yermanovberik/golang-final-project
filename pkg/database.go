@@ -9,12 +9,13 @@ import (
 )
 
 // NewPgxConn pool
-func NewPgxConn() (*pgxpool.Pool, error) {
-username := os.Getenv("DB_USERNAME")
-	password := os.Getenv("DB_PASSWORD")
-	host := os.Getenv("DB_HOST")
-	port := os.Getenv("DB_PORT")
-	dbname := os.Getenv("DB_NAME")
+func NewPgxConn(env *Env) (*pgxpool.Pool, error) {
+	username := env.DBUser
+	password := env.DBPass
+	host := env.DBHost
+	port := env.DBPort
+	dbname := env.DBName
+
 	ctx := context.Background()
 
 	// Формирование строки подключения
@@ -39,8 +40,6 @@ username := os.Getenv("DB_USERNAME")
 
 	return pool , nil
 }
-
-
 
 func Close(p *pgxpool.Pool) {
 	if p != nil {
