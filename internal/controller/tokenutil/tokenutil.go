@@ -17,7 +17,7 @@ func CreateAccessToken(user *models.User, secret string, expiry int) (accessToke
 	exp := time.Now().Add(time.Hour * time.Duration(expiry))
 	claims := &models.JwtClaims{
 		ID:     user.ID,
-		RoleID: user.RoleID,
+		Role: user.Role,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(exp),
 		},
@@ -34,7 +34,7 @@ func CreateAccessToken(user *models.User, secret string, expiry int) (accessToke
 func CreateRefreshToken(user *models.User, secret string, expiry int) (refreshToken string, err error) {
 	claimsRefresh := &models.JwtRefreshClaims{
 		ID: user.ID,
-		RoleID: user.RoleID,
+		Role: user.Role,
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(time.Hour * time.Duration(expiry))),
 		},
